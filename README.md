@@ -103,3 +103,18 @@ Every error uses one envelope (`status`, `code`, `message`, `correlationId`, opt
 
 - `docs/ARCHITECTURE.md`: layers, data model, state machine, concurrency, request lifecycle, front-end structure.
 - `docs/SECURITY.md`: control map, threat boundaries, known limitations and the production hardening checklist.
+
+## Project Deliverables & Evidence Index
+
+- **Architecture Documentation:** [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
+- **Security Note & Threat Model:** [docs/SECURITY.md](docs/SECURITY.md)
+- **Automated Test Report:** [docs/TEST_REPORT.md](docs/TEST_REPORT.md)
+- **OpenAPI Specification:** [docs/openapi.json](docs/openapi.json) (Live UI: `http://localhost:8080/swagger-ui.html`)
+- **Demo Script:** [docs/DEMO_SCRIPT.md](docs/DEMO_SCRIPT.md)
+- **Acceptance Criteria Evidence Screenshots:**
+  - [AC-01: BOLA 403 Forbidden](docs/screenshots/AC-01/)
+  - [AC-02: State Transition & Resolution Rule](docs/screenshots/AC-02/)
+  - [AC-03: Filtering, Search & Pagination](docs/screenshots/AC-03/)
+  - [AC-04: Immutable Activity History](docs/screenshots/AC-04/)
+  - [AC-05: Stored XSS Neutralization](docs/screenshots/AC-05/)
+  - [Swagger UI API Contract](docs/screenshots/Swagger_UI.png)
