@@ -104,17 +104,28 @@ Every error uses one envelope (`status`, `code`, `message`, `correlationId`, opt
 - `docs/ARCHITECTURE.md`: layers, data model, state machine, concurrency, request lifecycle, front-end structure.
 - `docs/SECURITY.md`: control map, threat boundaries, known limitations and the production hardening checklist.
 
-## Project Deliverables & Evidence Index
+## 12. Deliverables & Acceptance Criteria Index
 
-- **Architecture Documentation:** [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
-- **Security Note & Threat Model:** [docs/SECURITY.md](docs/SECURITY.md)
-- **Automated Test Report:** [docs/TEST_REPORT.md](docs/TEST_REPORT.md)
-- **OpenAPI Specification:** [docs/openapi.json](docs/openapi.json) (Live UI: `http://localhost:8080/swagger-ui.html`)
-- **Demo Script:** [docs/DEMO_SCRIPT.md](docs/DEMO_SCRIPT.md)
-- **Acceptance Criteria Evidence Screenshots:**
-  - [AC-01: BOLA 403 Forbidden](docs/screenshots/AC-01/)
-  - [AC-02: State Transition & Resolution Rule](docs/screenshots/AC-02/)
-  - [AC-03: Filtering, Search & Pagination](docs/screenshots/AC-03/)
-  - [AC-04: Immutable Activity History](docs/screenshots/AC-04/)
-  - [AC-05: Stored XSS Neutralization](docs/screenshots/AC-05/)
-  - [Swagger UI API Contract](docs/screenshots/Swagger_UI.png)
+All primary project artifacts, architectural decisions, and visual proof of acceptance criteria are organized under the [`docs/`](docs/) directory.
+
+### Core Documentation
+* **Architecture & System Design:** [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) (C4 context, components, data flows, trust boundaries, and ADRs)
+* **Security Note & Threat Model:** [`docs/SECURITY.md`](docs/SECURITY.md) (STRIDE analysis, implemented controls, residual risks, and dependency summary)
+* **OpenAPI 3.0 Contract:** [`docs/openapi.json`](docs/openapi.json) (Live interactive UI available at `/swagger-ui.html`)
+* **Automated Test Report:** [`docs/TEST_REPORT.md`](docs/TEST_REPORT.md) (329/329 passing tests: unit, integration, concurrency, and security suites)
+* **Demonstration Walkthrough Script:** [`docs/DEMO_SCRIPT.md`](docs/DEMO_SCRIPT.md) (Step-by-step 5–10 minute oral evaluation guide)
+* **Database Migrations:** [`backend/src/main/resources/db/migration/`](backend/src/main/resources/db/migration/) (`V1__init_schema.sql` and `V2__seed_test_data.sql`)
+
+### Acceptance Criteria Evidence (Screenshots)
+* **[AC-01] BOLA & Horizontal Isolation:** [`docs/screenshots/AC-01%20(BOLA%20test)/`](<docs/screenshots/AC-01 (BOLA test)/>)
+  * Proves cross-project access rejection (`403 Forbidden` with Correlation ID).
+* **[AC-02] State Machine & Assignment Control:** [`docs/screenshots/AC-02%20System%20rejects%20invalid%20state%20transition.../`](<docs/screenshots/AC-02 System rejects invalid state transition.../>)
+  * Proves invalid state transition rejections and mandatory resolution enforcement before `CLOSED`.
+* **[AC-03] Filtering, Search & Server Pagination:** [`docs/screenshots/AC-03%20(Search,%20Filters,%20and%20Pagination)/`](<docs/screenshots/AC-03 (Search, Filters, and Pagination)/>)
+  * Proves multi-parameter filtering (status, priority, keyword) and backend pagination controls.
+* **[AC-04] Chronological & Immutable Activity Timeline:** [`docs/screenshots/AC-04%20(Chronological,%20Immutable%20Activity...)/`](<docs/screenshots/AC-04 (Chronological, Immutable Activity...)/>)
+  * Proves append-only audit trail logging actors, field changes, and relative timestamps.
+* **[AC-05] Stored XSS Neutralization:** [`docs/screenshots/AC-05%20(Stored%20XSS%20Defense)/`](<docs/screenshots/AC-05 (Stored XSS Defense)/>)
+  * Proves HTML tag entity encoding and malicious scheme blocking (`javascript:` $\rightarrow$ `#blocked`).
+* **API Documentation UI:** [`docs/screenshots/Swagger_UI.png`](docs/screenshots/Swagger_UI.png)
+  * Screenshot of live interactive Swagger UI endpoints and schemas.
