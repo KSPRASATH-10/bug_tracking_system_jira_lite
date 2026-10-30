@@ -1,0 +1,29 @@
+# --- secrets and local configuration (the .env.example templates ARE committed)
+.env
+.env.*
+!.env.example
+*.local
+
+# --- backend (Maven / JVM)
+backend/target/
+backend/var/
+*.class
+hs_err_pid*
+
+# --- frontend (Node / Vite)
+frontend/node_modules/
+frontend/dist/
+frontend/*.tsbuildinfo
+
+# --- output of assemble_project.py
+bny-jira-lite/
+bny-jira-lite-production.zip
+SHA256SUMS.txt
+
+# --- logs, IDEs, operating systems
+*.log
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db

@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    # Real connection details are injected by Testcontainers (see AbstractIntegrationTest).
+    password: injected-by-testcontainers
+  jpa:
+    show-sql: false
+
+bts:
+  security:
+    jwt-secret: test-only-signing-key-0123456789-abcdefghijklmnop
+    jwt-ttl-minutes: 5
+    cookie-secure: true
+    cors-allowed-origin: http://localhost:5173
+  rate-limit:
+    # High ceiling so the many logins performed by the integration suite never trip the limiter.
+    # The limiter itself is verified in LoginRateLimitFilterTest with its own small configuration.
+    login-capacity: 1000
+    login-refill-period-seconds: 60
+  storage:
+    upload-dir: ${java.io.tmpdir}/bts-test-uploads
+    max-file-bytes: 5242880
+
+logging:
+  level:
+    root: WARN
+    com.enterprise.bts: INFO

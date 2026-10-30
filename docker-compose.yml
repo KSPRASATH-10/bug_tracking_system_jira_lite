@@ -1,0 +1,41 @@
+name: enterprise-jira-lite
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: bts-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${BTS_DB_NAME:-bts}
+      POSTGRES_USER: ${BTS_DB_USER:-bts_app}
+      POSTGRES_PASSWORD: ${BTS_DB_PASSWORD:?BTS_DB_PASSWORD must be set (copy .env.example to .env)}
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8 --locale=C.UTF-8 --data-checksums"
+      TZ: UTC
+      PGTZ: UTC
+    command:
+      - postgres
+      - -c
+      - timezone=UTC
+      - -c
+      - log_timezone=UTC
+      - -c
+      - log_min_duration_statement=500
+      - -c
+      - password_encryption=scram-sha-256
+    ports:
+      # Bound to loopback only: the database is never exposed to the LAN.
+      - "127.0.0.1:${BTS_DB_PORT:-5432}:5432"
+    volumes:
+      - bts_pgdata:/var/lib/postgresql/data
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+
+volumes:
+  bts_pgdata:
+    name: bts_pgdata
